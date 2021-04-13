@@ -25,7 +25,10 @@ const MinifigsMainPage: FunctionComponent<IProps> = ({ count, minifigs }) => {
       <div>
         {minifigs.map((minifig) => {
           return (
-            <Link href={`/minifigs/${minifig.set_num}`} key={minifig.set_num}>
+            <Link
+              href={`/minifigs/minifig/${minifig.set_num}`}
+              key={minifig.set_num}
+            >
               <a>{minifig.set_num}</a>
             </Link>
           );

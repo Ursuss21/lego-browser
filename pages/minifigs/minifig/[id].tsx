@@ -1,7 +1,7 @@
 import React from "react";
 import { useRouter } from "next/router";
 import { GetStaticProps, GetStaticPaths } from "next";
-import getDataFromAPI from "../../middleware/fetch";
+import getDataFromAPI from "../../../middleware/fetch";
 
 const Page = () => {
   const router = useRouter();

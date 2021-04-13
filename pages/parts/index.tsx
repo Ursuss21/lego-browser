@@ -25,7 +25,7 @@ const PartsMainPage: FunctionComponent<IProps> = ({ count, parts }) => {
       <div>
         {parts.map((part) => {
           return (
-            <Link href={`/parts/${part.part_num}`} key={part.part_num}>
+            <Link href={`/parts/part/${part.part_num}`} key={part.part_num}>
               <a>{part.part_num}</a>
             </Link>
           );
