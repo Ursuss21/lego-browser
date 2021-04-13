@@ -1,19 +1,15 @@
 import React from "react";
-import Link from "next/link";
+import NavBar from "../components/navBar";
 
 const MainPage = () => {
   return (
     <div>
-      <h1>Main Page</h1>
-      <Link href="/sets">
-        <a>Sets</a>
-      </Link>
-      <Link href="/parts">
-        <a>Parts</a>
-      </Link>
-      <Link href="/minifigs">
-        <a>Minifigs</a>
-      </Link>
+      <header>
+        <h1>Main Page</h1>
+        <NavBar />
+      </header>
+      <main>There will be content</main>
+      <footer>© 2021 Copyright by Robert Skrzypczak</footer>
     </div>
   );
 };
