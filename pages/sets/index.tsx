@@ -4,6 +4,8 @@ import { GetStaticProps } from "next";
 
 interface IProps {
   count: number;
+  next: string;
+  previous: string;
   sets: [
     {
       set_num: string;
@@ -18,13 +20,16 @@ interface IProps {
 }
 
 const SetsMainPage: FunctionComponent<IProps> = ({ count, sets }) => {
-  console.log(count);
   return (
     <div>
       <h1>Sets Page</h1>
       <div>
         {sets.map((set) => {
-          return <div key={set.set_num}>{set.set_num}</div>;
+          return (
+            <Link href={`/sets/${set.set_num}`} key={set.set_num}>
+              <a>{set.set_num}</a>
+            </Link>
+          );
         })}
       </div>
       <Link href="/">
@@ -41,7 +46,6 @@ export const getStaticProps: GetStaticProps = async (context) => {
     `${process.env.REBRICKABLE_URL}sets/?key=${process.env.REBRICKABLE_API_KEY}`
   );
   const data = await res.json();
-  console.log(data.results);
   return {
     props: {
       sets: data.results,

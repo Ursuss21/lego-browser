@@ -1,12 +1,49 @@
 import React from "react";
 import { useRouter } from "next/router";
+import { GetStaticProps, GetStaticPaths } from "next";
 
 const Page = () => {
   const router = useRouter();
 
   const { id } = router.query;
 
-  return <div>Part {id}</div>;
+  if (router.isFallback) {
+    return <div>Loading</div>;
+  } else {
+    return <div>Part {id}</div>;
+  }
 };
 
 export default Page;
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const url = process.env.REBRICKABLE_URL;
+  const key = process.env.REBRICKABLE_API_KEY;
+
+  const res = await fetch(`${url}parts/?key=${key}`);
+  const data = await res.json();
+
+  const paths = data.results.map((part: any) => ({
+    params: {
+      id: part.part_num,
+    },
+  }));
+  return { paths, fallback: true };
+};
+
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+  if (typeof params !== "undefined") {
+    const url = process.env.REBRICKABLE_URL;
+    const key = process.env.REBRICKABLE_API_KEY;
+
+    const res = await fetch(`${url}parts/${params.id}/?key=${key}`);
+    const data = await res.json();
+
+    return {
+      props: {
+        sets: data,
+      },
+    };
+  }
+  return { props: {} };
+};

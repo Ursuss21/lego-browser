@@ -14,6 +14,8 @@ const Page = () => {
   }
 };
 
+export default Page;
+
 export const getStaticPaths: GetStaticPaths = async () => {
   const url = process.env.REBRICKABLE_URL;
   const key = process.env.REBRICKABLE_API_KEY;
@@ -43,7 +45,5 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       },
     };
   }
-  return { props: {}, revalidate: 1 };
+  return { props: {} };
 };
-
-export default Page;
