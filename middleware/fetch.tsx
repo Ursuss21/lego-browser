@@ -24,6 +24,7 @@ export default async function getDataFromAPI({
     urlString += `&page=${page}`;
   }
 
+  console.log(urlString);
   const res = await fetch(urlString);
   const data = await res.json();
 

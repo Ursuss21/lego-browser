@@ -32,7 +32,7 @@ const SetsMainPage: FunctionComponent<IProps> = ({
       <div>
         {sets.map((set) => {
           return (
-            <Link href={`/sets/${set.set_num}`} key={set.set_num}>
+            <Link href={`/sets/set/${set.set_num}`} key={set.set_num}>
               <a>{set.set_num}</a>
             </Link>
           );
@@ -48,7 +48,12 @@ const SetsMainPage: FunctionComponent<IProps> = ({
 export default SetsMainPage;
 
 export const getStaticProps: GetStaticProps = async (context) => {
-  const data = await getDataFromAPI({ folder: "sets", page: "1" });
+  const currentPage = context.params?.currentPage as string;
+
+  const data = await getDataFromAPI({
+    folder: "sets",
+    page: currentPage,
+  });
   return {
     props: {
       sets: data.results,

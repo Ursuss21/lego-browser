@@ -1,7 +1,7 @@
 import React from "react";
 import { useRouter } from "next/router";
 import { GetStaticProps, GetStaticPaths } from "next";
-import getDataFromAPI from "../../middleware/fetch";
+import getDataFromAPI from "../../../middleware/fetch";
 
 const Page = () => {
   const router = useRouter();
@@ -18,7 +18,7 @@ const Page = () => {
 export default Page;
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const data = await getDataFromAPI({ folder: "sets", page: "1" });
+  const data = await getDataFromAPI({ folder: "sets" });
 
   const paths = data.results.map((set: any) => ({
     params: {
