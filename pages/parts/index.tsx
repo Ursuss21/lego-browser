@@ -1,6 +1,7 @@
 import React, { FunctionComponent } from "react";
 import Link from "next/link";
 import { GetStaticProps } from "next";
+import getDataFromAPI from "../../middleware/fetch";
 
 interface IProps {
   count: number;
@@ -40,10 +41,7 @@ const PartsMainPage: FunctionComponent<IProps> = ({ count, parts }) => {
 export default PartsMainPage;
 
 export const getStaticProps: GetStaticProps = async (context) => {
-  const res = await fetch(
-    `${process.env.REBRICKABLE_URL}parts/?key=${process.env.REBRICKABLE_API_KEY}`
-  );
-  const data = await res.json();
+  const data = await getDataFromAPI({ folder: "parts", page: "1" });
   return {
     props: {
       parts: data.results,

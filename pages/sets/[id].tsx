@@ -1,6 +1,7 @@
 import React from "react";
 import { useRouter } from "next/router";
 import { GetStaticProps, GetStaticPaths } from "next";
+import getDataFromAPI from "../../middleware/fetch";
 
 const Page = () => {
   const router = useRouter();
@@ -17,11 +18,7 @@ const Page = () => {
 export default Page;
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const url = process.env.REBRICKABLE_URL;
-  const key = process.env.REBRICKABLE_API_KEY;
-
-  const res = await fetch(`${url}sets/?key=${key}`);
-  const data = await res.json();
+  const data = await getDataFromAPI({ folder: "sets", page: "1" });
 
   const paths = data.results.map((set: any) => ({
     params: {
@@ -33,11 +30,10 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   if (typeof params !== "undefined") {
-    const url = process.env.REBRICKABLE_URL;
-    const key = process.env.REBRICKABLE_API_KEY;
-
-    const res = await fetch(`${url}sets/${params.id}/?key=${key}`);
-    const data = await res.json();
+    const data = await getDataFromAPI({
+      folder: "sets",
+      id: params.id?.toString(),
+    });
 
     return {
       props: {

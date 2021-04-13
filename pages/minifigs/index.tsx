@@ -1,6 +1,7 @@
 import React, { FunctionComponent } from "react";
 import Link from "next/link";
 import { GetStaticProps } from "next";
+import getDataFromAPI from "../../middleware/fetch";
 
 interface IProps {
   count: number;
@@ -40,10 +41,7 @@ const MinifigsMainPage: FunctionComponent<IProps> = ({ count, minifigs }) => {
 export default MinifigsMainPage;
 
 export const getStaticProps: GetStaticProps = async (context) => {
-  const res = await fetch(
-    `${process.env.REBRICKABLE_URL}minifigs/?key=${process.env.REBRICKABLE_API_KEY}`
-  );
-  const data = await res.json();
+  const data = await getDataFromAPI({ folder: "minifigs", page: "1" });
   return {
     props: {
       minifigs: data.results,

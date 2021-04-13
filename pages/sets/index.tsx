@@ -1,6 +1,7 @@
 import React, { FunctionComponent } from "react";
 import Link from "next/link";
 import { GetStaticProps } from "next";
+import getDataFromAPI from "../../middleware/fetch";
 
 interface IProps {
   count: number;
@@ -19,7 +20,12 @@ interface IProps {
   ];
 }
 
-const SetsMainPage: FunctionComponent<IProps> = ({ count, sets }) => {
+const SetsMainPage: FunctionComponent<IProps> = ({
+  count,
+  next,
+  previous,
+  sets,
+}) => {
   return (
     <div>
       <h1>Sets Page</h1>
@@ -42,13 +48,12 @@ const SetsMainPage: FunctionComponent<IProps> = ({ count, sets }) => {
 export default SetsMainPage;
 
 export const getStaticProps: GetStaticProps = async (context) => {
-  const res = await fetch(
-    `${process.env.REBRICKABLE_URL}sets/?key=${process.env.REBRICKABLE_API_KEY}`
-  );
-  const data = await res.json();
+  const data = await getDataFromAPI({ folder: "sets", page: "1" });
   return {
     props: {
       sets: data.results,
+      next: data.next,
+      previous: data.previous,
       count: data.count,
     },
   };
