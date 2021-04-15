@@ -1,1 +1,91 @@
-@import "navbar";
+@import "variables";
+
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: #666;
+  overflow-x: hidden;
+}
+
+header,
+footer {
+  position: relative;
+  height: 10vh;
+  main {
+    display: block;
+  }
+}
+
+.navbar {
+  overflow: hidden;
+  background-color: #333;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  ul {
+    text-align: center;
+    list-style-type: none;
+    list-style-type: none;
+    margin: 0;
+    padding: 15px;
+    li {
+      display: inline;
+      font-size: 17px;
+      a {
+        color: #f2f2f2;
+        text-decoration: none;
+        padding: 14px;
+        &:hover {
+          background-color: #111;
+        }
+      }
+    }
+  }
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  .container-element {
+    width: 100%;
+    height: 80vh;
+    display: flex;
+    padding: 5px;
+    cursor: pointer;
+    flex-grow: 1;
+    justify-content: center;
+    align-items: center;
+
+    .text-field {
+      width: 200px;
+      height: 50px;
+      background-color: $dark-transparent;
+      border-radius: 20px;
+      color: $text-white;
+      text-align: center;
+    }
+  }
+}
+
+.red {
+  background-color: $red-primary;
+}
+
+.green {
+  background-color: $green-primary;
+}
+
+.blue {
+  background-color: $blue-secondary;
+}
+
+@media (max-width: 800px) {
+  .container {
+    flex-direction: column;
+    height: 100%;
+  }
+}

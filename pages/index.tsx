@@ -1,14 +1,29 @@
 import React from "react";
-import NavBar from "../components/navBar";
+import Link from "next/link";
 
 const MainPage = () => {
   return (
     <div>
-      <header>
-        <h1>Main Page</h1>
-        <NavBar />
-      </header>
-      <main>There will be content</main>
+      <header>Head</header>
+      <main>
+        <section className="container">
+          <Link href="/sets">
+            <div className="container-element red">
+              <p className="text-field">Sets</p>
+            </div>
+          </Link>
+          <Link href="/parts">
+            <div className="container-element green">
+              <p className="text-field">Parts</p>
+            </div>
+          </Link>
+          <Link href="/minifigs">
+            <div className="container-element blue">
+              <p className="text-field">Minifigs</p>
+            </div>
+          </Link>
+        </section>
+      </main>
       <footer>© 2021 Copyright by Robert Skrzypczak</footer>
     </div>
   );
