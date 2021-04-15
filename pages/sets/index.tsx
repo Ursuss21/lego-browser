@@ -18,6 +18,7 @@ interface IProps {
       set_url: string;
     }
   ];
+  currentPage: string;
 }
 
 const SetsMainPage: FunctionComponent<IProps> = ({
@@ -25,7 +26,17 @@ const SetsMainPage: FunctionComponent<IProps> = ({
   next,
   previous,
   sets,
+  currentPage,
 }) => {
+  const numberOfPages = Math.ceil(count / 100);
+  console.log(`number of pages: ${numberOfPages}`);
+
+  const pagination = Array(7)
+    .fill("")
+    .map((_, index) => {
+      const idx = Number(currentPage) + index;
+      return idx.toString();
+    });
   return (
     <div>
       <h1>Sets Page</h1>
@@ -36,6 +47,23 @@ const SetsMainPage: FunctionComponent<IProps> = ({
               <a>{set.set_num}</a>
             </Link>
           );
+        })}
+      </div>
+      <div className="pagination">
+        {pagination.map((page) => {
+          if (currentPage === page) {
+            return (
+              <Link href={`/sets/${page}`} key={page}>
+                <a className="active">{page}</a>
+              </Link>
+            );
+          } else {
+            return (
+              <Link href={`/sets/${page}`} key={page}>
+                <a>{page}</a>
+              </Link>
+            );
+          }
         })}
       </div>
       <Link href="/">
@@ -60,6 +88,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
       next: data.next,
       previous: data.previous,
       count: data.count,
+      currentPage,
     },
   };
 };
