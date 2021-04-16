@@ -109,5 +109,9 @@ footer {
     &:hover:not(.active) {
       background-color: #ddd;
     }
+
+    &.disabled {
+      pointer-events: none;
+    }
   }
 }

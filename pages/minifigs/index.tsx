@@ -44,7 +44,7 @@ const MinifigsMainPage: FunctionComponent<IProps> = ({ count, minifigs }) => {
 export default MinifigsMainPage;
 
 export const getStaticProps: GetStaticProps = async (context) => {
-  const data = await getDataFromAPI({ folder: "minifigs", page: "1" });
+  const data = await getDataFromAPI({ folder: "minifigs", page: 1 });
   return {
     props: {
       minifigs: data.results,

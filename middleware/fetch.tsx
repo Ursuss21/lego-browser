@@ -1,6 +1,6 @@
 interface IGetDataParameters {
   folder: string;
-  page?: string | undefined;
+  page?: number | undefined;
   id?: string | undefined;
 }
 

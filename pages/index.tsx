@@ -7,7 +7,7 @@ const MainPage = () => {
       <header>Head</header>
       <main>
         <section className="container">
-          <Link href="/sets">
+          <Link href="/sets/1">
             <div className="container-element red">
               <p className="text-field">Sets</p>
             </div>

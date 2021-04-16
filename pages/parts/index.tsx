@@ -41,7 +41,7 @@ const PartsMainPage: FunctionComponent<IProps> = ({ count, parts }) => {
 export default PartsMainPage;
 
 export const getStaticProps: GetStaticProps = async (context) => {
-  const data = await getDataFromAPI({ folder: "parts", page: "1" });
+  const data = await getDataFromAPI({ folder: "parts", page: 1 });
   return {
     props: {
       parts: data.results,
