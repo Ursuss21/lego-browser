@@ -2,6 +2,7 @@ import React, { FunctionComponent } from "react";
 import Link from "next/link";
 
 interface IProps {
+  category: string;
   currentPage: number;
   count: number;
 }
@@ -24,7 +25,11 @@ const adjustPaginationOffset = (currentPage: number) => {
   return -2;
 };
 
-const Pagination: FunctionComponent<IProps> = ({ currentPage, count }) => {
+const Pagination: FunctionComponent<IProps> = ({
+  category,
+  currentPage,
+  count,
+}) => {
   const numberOfPages = Math.ceil(count / 100);
   const paginationSize = 5;
 
@@ -41,13 +46,13 @@ const Pagination: FunctionComponent<IProps> = ({ currentPage, count }) => {
       {pagination.map((page) => {
         if (currentPage === page) {
           return (
-            <Link href={`/sets/${page}`} key={page}>
+            <Link href={`/${category}/${page}`} key={page}>
               <a className="active">{page}</a>
             </Link>
           );
         } else {
           return (
-            <Link href={`/sets/${page}`} key={page}>
+            <Link href={`/${category}/${page}`} key={page}>
               <a>{page}</a>
             </Link>
           );

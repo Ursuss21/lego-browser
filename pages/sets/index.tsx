@@ -27,20 +27,33 @@ const SetsMainPage: FunctionComponent<IProps> = ({
 }) => {
   return (
     <div>
-      <h1>Sets Page</h1>
-      <div>
-        {sets.map((set) => {
-          return (
-            <Link href={`/sets/set/${set.set_num}`} key={set.set_num}>
-              <a>{set.set_num}</a>
-            </Link>
-          );
-        })}
-      </div>
-      <Pagination currentPage={currentPage} count={count} />
-      <Link href="/">
-        <a>Main Page</a>
-      </Link>
+      <header>Sets Page</header>
+      <main>
+        <Pagination category="sets" currentPage={currentPage} count={count} />
+        <div className="container">
+          {sets.map((set) => {
+            return (
+              <Link href={`/sets/set/${set.set_num}`} key={set.set_num}>
+                <a>
+                  <div className="card">
+                    <div className="miniature">
+                      <img src={set.set_img_url} alt={set.name} />
+                    </div>
+                    <div className="container">
+                      <h4>{set.name}</h4>
+                    </div>
+                  </div>
+                </a>
+              </Link>
+            );
+          })}
+        </div>
+        <Pagination category="sets" currentPage={currentPage} count={count} />
+        <Link href="/">
+          <a>Main Page</a>
+        </Link>
+      </main>
+      <footer>© 2021 Copyright by Robert Skrzypczak</footer>
     </div>
   );
 };

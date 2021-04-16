@@ -6,7 +6,7 @@ const MainPage = () => {
     <div>
       <header>Head</header>
       <main>
-        <section className="container">
+        <section className="landing-container">
           <Link href="/sets/1">
             <div className="container-element red">
               <p className="text-field">Sets</p>
