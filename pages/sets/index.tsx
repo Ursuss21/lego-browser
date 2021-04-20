@@ -3,6 +3,7 @@ import Link from "next/link";
 import { GetStaticProps } from "next";
 import getDataFromAPI from "../../middleware/fetch";
 import Pagination from "../../components/pagination";
+import ItemCountSelect from "../../components/itemsCountSelect";
 
 interface IProps {
   count: number;
@@ -30,6 +31,7 @@ const SetsMainPage: FunctionComponent<IProps> = ({
       <header>Sets Page</header>
       <main>
         <Pagination category="sets" currentPage={currentPage} count={count} />
+        <ItemCountSelect />
         <div className="container">
           {sets.map((set) => {
             return (
