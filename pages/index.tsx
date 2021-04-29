@@ -10,18 +10,24 @@ const MainPage = () => {
       <main>
         <section className="landing-container">
           <Link href="/sets/1">
-            <div className="container-element red">
-              <p className="text-field">Sets</p>
+            <div className="container-element sets">
+              <div className="text-field">
+                <div>Sets</div>
+              </div>
             </div>
           </Link>
           <Link href="/parts">
-            <div className="container-element green">
-              <p className="text-field">Parts</p>
+            <div className="container-element parts">
+              <div className="text-field">
+                <div>Parts</div>
+              </div>
             </div>
           </Link>
           <Link href="/minifigs">
-            <div className="container-element blue">
-              <p className="text-field">Minifigs</p>
+            <div className="container-element minifigs">
+              <div className="text-field">
+                <div>Minifigs</div>
+              </div>
             </div>
           </Link>
         </section>

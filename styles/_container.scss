@@ -12,14 +12,28 @@
     flex-grow: 1;
     justify-content: center;
     align-items: center;
+    background-position: center;
+    background-size: cover;
+    vertical-align: center;
 
     .text-field {
-      width: 200px;
-      height: 50px;
+      width: 30vh;
+      height: 7vh;
       background-color: $dark-transparent;
       border-radius: 20px;
       color: $text-white;
       text-align: center;
+      transition: 0.5s;
+
+      div {
+        padding: 2vh;
+        font-size: 3vh;
+      }
+
+      &:hover {
+        box-shadow: 0 0 10px $text-white;
+        background-color: $black;
+      }
     }
   }
 }
