@@ -1,10 +1,11 @@
 import React from "react";
 import Link from "next/link";
+import Header from "../components/header";
 
 const MainPage = () => {
   return (
     <div>
-      <header>Head</header>
+      <Header />
       <main>
         <section className="landing-container">
           <Link href="/sets/1">

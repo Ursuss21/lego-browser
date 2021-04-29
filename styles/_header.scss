@@ -1,0 +1,18 @@
+.navmenu {
+  background-color: #000;
+  overflow: hidden;
+
+  a {
+    float: right;
+    color: $text-white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+
+    :hover {
+      background-color: $white;
+      color: $black;
+    }
+  }
+}
