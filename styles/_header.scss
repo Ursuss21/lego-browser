@@ -1,16 +1,32 @@
+.logo {
+  width: 10vh;
+  height: 10vh;
+  padding-left: 20px;
+  transition: 0.5s;
+
+  &:hover {
+    filter: drop-shadow(0 0 5px white);
+  }
+}
+
 .navmenu {
-  background-color: #000;
   overflow: hidden;
+  float: right;
+  margin: 0 auto;
+  height: 100%;
 
   a {
-    float: right;
     color: $text-white;
     text-align: center;
-    padding: 14px 16px;
+    padding: 4vh;
     text-decoration: none;
-    font-size: 17px;
+    font-size: 2vh;
+    width: 100px;
+    height: 100%;
+    display: inline-block;
+    transition: 0.5s;
 
-    :hover {
+    &:hover {
       background-color: $white;
       color: $black;
     }

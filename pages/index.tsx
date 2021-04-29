@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import Header from "../components/header";
+import Footer from "../components/footer";
 
 const MainPage = () => {
   return (
@@ -25,7 +26,7 @@ const MainPage = () => {
           </Link>
         </section>
       </main>
-      <footer>© 2021 Copyright by Robert Skrzypczak</footer>
+      <Footer />
     </div>
   );
 };

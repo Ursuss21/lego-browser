@@ -4,6 +4,7 @@ import { GetStaticProps } from "next";
 import getDataFromAPI from "../../middleware/fetch";
 import Pagination from "../../components/pagination";
 import Header from "../../components/header";
+import Footer from "../../components/footer";
 
 interface IProps {
   count: number;
@@ -54,7 +55,7 @@ const SetsMainPage: FunctionComponent<IProps> = ({
           <a>Main Page</a>
         </Link>
       </main>
-      <footer>© 2021 Copyright by Robert Skrzypczak</footer>
+      <Footer />
     </div>
   );
 };

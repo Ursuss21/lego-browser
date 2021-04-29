@@ -2,6 +2,7 @@
 
 @import "backgrounds";
 @import "container";
+@import "footer";
 @import "header";
 @import "pagination";
 
@@ -11,6 +12,7 @@ body {
   margin: 0;
   padding: 0;
   background-color: #666;
+  color: $text-white;
   overflow-x: hidden;
 }
 
@@ -19,13 +21,12 @@ footer {
   width: 100%;
   height: 10vh;
   position: relative;
-  border: 1px black solid;
+  background-color: #000;
   margin: 0 auto;
 }
 
 main {
   width: 100%;
-  border: 1px black solid;
   display: flex;
   justify-content: center;
   flex-direction: column;
