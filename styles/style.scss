@@ -1,6 +1,7 @@
 @import "variables";
 
 @import "backgrounds";
+@import "card";
 @import "container";
 @import "footer";
 @import "header";
@@ -11,7 +12,8 @@ body {
   height: 100%;
   margin: 0;
   padding: 0;
-  background-color: #666;
+  background-image: url("../public/src/background.png");
+  background-color: $dark-grey;
   color: $text-white;
   overflow-x: hidden;
 }
@@ -21,7 +23,7 @@ footer {
   width: 100%;
   height: 10vh;
   position: relative;
-  background-color: #000;
+  background-color: $black;
   margin: 0 auto;
 }
 

@@ -5,6 +5,7 @@ import getDataFromAPI from "../../middleware/fetch";
 import Pagination from "../../components/pagination";
 import Header from "../../components/header";
 import Footer from "../../components/footer";
+import Card from "../../components/card";
 
 interface IProps {
   count: number;
@@ -32,21 +33,16 @@ const SetsMainPage: FunctionComponent<IProps> = ({
       <Header />
       <main>
         <Pagination category="sets" currentPage={currentPage} count={count} />
-        <div className="container">
+        <div className="card-container">
           {sets.map((set) => {
             return (
-              <Link href={`/sets/set/${set.set_num}`} key={set.set_num}>
-                <a>
-                  <div className="card">
-                    <div className="miniature">
-                      <img src={set.set_img_url} alt={set.name} />
-                    </div>
-                    <div>
-                      <h4>{set.name}</h4>
-                    </div>
-                  </div>
-                </a>
-              </Link>
+              <Card
+                path="/sets/set/"
+                num={set.set_num}
+                img_url={set.set_img_url}
+                name={set.name}
+                key={set.set_num}
+              />
             );
           })}
         </div>

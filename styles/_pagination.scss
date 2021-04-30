@@ -1,12 +1,14 @@
 .pagination {
   display: inline-block;
+  margin: 10px auto 0;
+  background-color: $black;
 
   a {
-    color: black;
+    color: $text-white;
     float: left;
-    padding: 8px 16px;
+    padding: 8px 20px;
     text-decoration: none;
-    border-radius: 5px;
+    font-size: $font-medium;
     transition: background-color 0.3s;
 
     &.active {
@@ -16,6 +18,7 @@
 
     &:hover:not(.active) {
       background-color: #ddd;
+      color: $dark-grey;
     }
 
     &.disabled {
