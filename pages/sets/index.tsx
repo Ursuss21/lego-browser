@@ -1,5 +1,4 @@
 import React, { FunctionComponent } from "react";
-import Link from "next/link";
 import { GetStaticProps } from "next";
 import getDataFromAPI from "../../middleware/fetch";
 import Pagination from "../../components/pagination";
@@ -47,9 +46,6 @@ const SetsMainPage: FunctionComponent<IProps> = ({
           })}
         </div>
         <Pagination category="sets" currentPage={currentPage} count={count} />
-        <Link href="/">
-          <a>Main Page</a>
-        </Link>
       </main>
       <Footer />
     </div>

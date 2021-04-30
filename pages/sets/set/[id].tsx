@@ -1,17 +1,50 @@
-import React from "react";
+import React, { FunctionComponent } from "react";
 import { useRouter } from "next/router";
 import { GetStaticProps, GetStaticPaths } from "next";
 import getDataFromAPI from "../../../middleware/fetch";
+import Header from "../../../components/header";
+import Footer from "../../../components/footer";
+import Link from "next/link";
 
-const Page = () => {
+interface IProps {
+  set: {
+    set_num: string;
+    name: string;
+    year: number;
+    theme_id: number;
+    num_parts: number;
+    set_img_url: string;
+    set_url: string;
+  };
+}
+
+const Page: FunctionComponent<IProps> = ({ set }) => {
   const router = useRouter();
-
-  const { id } = router.query;
 
   if (router.isFallback) {
     return <div>Loading</div>;
   } else {
-    return <div>Set {id}</div>;
+    return (
+      <div>
+        <Header />
+        <main>
+          <div className="item-container">
+            <div className="item-image">
+              <img src={set.set_img_url} alt={set.name} />
+            </div>
+            <div className="item-description">
+              <span>Set number: {set.set_num}</span>
+              <span>Name: {set.name}</span>
+              <span>Year: {set.year}</span>
+              <span>
+                <Link href={set.set_url}>Rebrickable link</Link>
+              </span>
+            </div>
+          </div>
+        </main>
+        <Footer />
+      </div>
+    );
   }
 };
 
@@ -34,10 +67,9 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       folder: "sets",
       id: params.id?.toString(),
     });
-
     return {
       props: {
-        sets: data,
+        set: data,
       },
     };
   }

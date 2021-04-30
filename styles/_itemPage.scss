@@ -1,0 +1,51 @@
+.item-container {
+  width: 60vw;
+  margin: 0 auto;
+  background-image: url("../public/src/card-background.png");
+  background-color: $black;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+
+  .item-image {
+    margin: 5vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+    img {
+      border-radius: 20px;
+    }
+  }
+
+  .item-description {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    padding: 10px 0;
+    margin-bottom: 30px;
+    border-radius: 30px;
+    background-color: $black;
+    font-size: $font-medium;
+
+    span {
+      width: 100%;
+      padding: 10px;
+      display: block;
+      text-align: center;
+
+      a {
+        border: 1px $green-secondary solid;
+        border-radius: 10px;
+        padding: 10px;
+        background-color: $green-secondary;
+        text-decoration: none;
+        color: $text-white;
+      }
+    }
+  }
+}
