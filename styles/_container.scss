@@ -16,9 +16,10 @@
     background-size: cover;
     vertical-align: center;
     transition: 0.5s;
+    filter: grayscale(100%);
 
     &:hover {
-      filter: grayscale(100%);
+      filter: none;
     }
 
     .text-field {

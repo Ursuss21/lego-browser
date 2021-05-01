@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from "react";
-import { GetStaticProps } from "next";
+import { GetServerSideProps } from "next";
 import getDataFromAPI from "../../middleware/fetch";
 import Pagination from "../../components/pagination";
 import Header from "../../components/header";
@@ -54,13 +54,14 @@ const SetsMainPage: FunctionComponent<IProps> = ({
 
 export default SetsMainPage;
 
-export const getStaticProps: GetStaticProps = async (context) => {
+export const getServerSideProps: GetServerSideProps = async (context) => {
   const curPage = context.params?.currentPage as string;
   const currentPage = parseInt(curPage, 10);
 
   const data = await getDataFromAPI({
     folder: "sets",
-    page: currentPage,
+    page: currentPage || 1,
+    page_size: 20,
   });
   return {
     props: {
