@@ -5,10 +5,12 @@ import Pagination from "../../components/pagination";
 import Header from "../../components/header";
 import Footer from "../../components/footer";
 import Card from "../../components/card";
+import Dropdown from "../../components/dropdown";
 
 interface IProps {
   count: number;
   currentPage: number;
+  pageSize: number;
   sets: [
     {
       set_num: string;
@@ -25,13 +27,20 @@ interface IProps {
 const SetsMainPage: FunctionComponent<IProps> = ({
   count,
   currentPage,
+  pageSize,
   sets,
 }) => {
   return (
     <div>
       <Header />
       <main>
-        <Pagination category="sets" currentPage={currentPage} count={count} />
+        <Pagination
+          category="sets"
+          currentPage={currentPage}
+          count={count}
+          pageSize={pageSize}
+        />
+        <Dropdown />
         <div className="card-container">
           {sets.map((set) => {
             return (
@@ -45,7 +54,12 @@ const SetsMainPage: FunctionComponent<IProps> = ({
             );
           })}
         </div>
-        <Pagination category="sets" currentPage={currentPage} count={count} />
+        <Pagination
+          category="sets"
+          currentPage={currentPage}
+          count={count}
+          pageSize={pageSize}
+        />
       </main>
       <Footer />
     </div>
@@ -56,18 +70,23 @@ export default SetsMainPage;
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const curPage = context.params?.currentPage as string;
-  const currentPage = parseInt(curPage, 10);
+  const currentPage = parseInt(curPage, 10) || 1;
 
+  const pgSize = context.query.page_size as string;
+  const pageSize = parseInt(pgSize, 10) || 20;
+
+  console.log(context.query);
   const data = await getDataFromAPI({
     folder: "sets",
-    page: currentPage || 1,
-    page_size: 20,
+    page: currentPage,
+    page_size: pageSize,
   });
   return {
     props: {
       sets: data.results,
       count: data.count,
       currentPage,
+      pageSize,
     },
   };
 };

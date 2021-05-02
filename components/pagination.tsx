@@ -4,6 +4,7 @@ import Link from "next/link";
 interface IProps {
   category: string;
   currentPage: number;
+  pageSize: number;
   count: number;
 }
 
@@ -28,9 +29,10 @@ const adjustPaginationOffset = (currentPage: number) => {
 const Pagination: FunctionComponent<IProps> = ({
   category,
   currentPage,
+  pageSize,
   count,
 }) => {
-  const numberOfPages = Math.ceil(count / 100);
+  const numberOfPages = Math.ceil(count / pageSize);
   const paginationSize = 5;
 
   const pagination = Array(
@@ -46,13 +48,19 @@ const Pagination: FunctionComponent<IProps> = ({
       {pagination.map((page) => {
         if (currentPage === page) {
           return (
-            <Link href={`/${category}/${page}`} key={page}>
+            <Link
+              href={`/${category}/${page}?page_size=${pageSize}`}
+              key={page}
+            >
               <a className="active">{page}</a>
             </Link>
           );
         } else {
           return (
-            <Link href={`/${category}/${page}`} key={page}>
+            <Link
+              href={`/${category}/${page}?page_size=${pageSize}`}
+              key={page}
+            >
               <a>{page}</a>
             </Link>
           );
