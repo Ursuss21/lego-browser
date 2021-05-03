@@ -31,6 +31,7 @@ interface IProps {
   themesCount: number;
   currentPage: number;
   pageSize: number;
+  themeID: number;
 }
 
 const SetsMainPage: FunctionComponent<IProps> = ({
@@ -40,6 +41,7 @@ const SetsMainPage: FunctionComponent<IProps> = ({
   themesCount,
   currentPage,
   pageSize,
+  themeID,
 }) => {
   return (
     <div>
@@ -54,6 +56,7 @@ const SetsMainPage: FunctionComponent<IProps> = ({
           currentPage={currentPage}
           setsCount={setsCount}
           pageSize={pageSize}
+          themeID={themeID}
         />
         <div className="card-container">
           {sets.map((set) => {
@@ -73,6 +76,7 @@ const SetsMainPage: FunctionComponent<IProps> = ({
           currentPage={currentPage}
           setsCount={setsCount}
           pageSize={pageSize}
+          themeID={themeID}
         />
       </main>
       <Footer />
@@ -113,6 +117,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       themesCount: themesData.count,
       currentPage,
       pageSize,
+      themeID,
     },
   };
 };

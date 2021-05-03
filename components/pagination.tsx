@@ -5,10 +5,17 @@ interface IProps {
   category: string;
   currentPage: number;
   pageSize: number;
+  themeID: number;
   setsCount: number;
 }
 
 const adjustPaginationSize = (currentPage: number, numberOfPages: number) => {
+  if (numberOfPages === 1) {
+    return -4;
+  }
+  if (numberOfPages === 2) {
+    return -3;
+  }
   if (currentPage === 1 || currentPage === numberOfPages) {
     return -2;
   } else if (currentPage === 2 || currentPage === numberOfPages - 1) {
@@ -30,6 +37,7 @@ const Pagination: FunctionComponent<IProps> = ({
   category,
   currentPage,
   pageSize,
+  themeID,
   setsCount,
 }) => {
   const numberOfPages = Math.ceil(setsCount / pageSize);
@@ -49,7 +57,7 @@ const Pagination: FunctionComponent<IProps> = ({
         if (currentPage === page) {
           return (
             <Link
-              href={`/${category}/${page}?page_size=${pageSize}`}
+              href={`/${category}/${page}?page_size=${pageSize}&theme_id=${themeID}`}
               key={page}
             >
               <a className="active">{page}</a>
@@ -58,7 +66,7 @@ const Pagination: FunctionComponent<IProps> = ({
         } else {
           return (
             <Link
-              href={`/${category}/${page}?page_size=${pageSize}`}
+              href={`/${category}/${page}?page_size=${pageSize}&theme_id=${themeID}`}
               key={page}
             >
               <a>{page}</a>

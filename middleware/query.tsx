@@ -47,6 +47,11 @@ const prepareQueryString = ({
       queryArray = queryString.split("&");
     }
   }
+  const basePathArray = basePath?.split("/");
+  if (basePathArray !== undefined) {
+    basePathArray[2] = "1";
+    basePath = basePathArray.join("/");
+  }
   resultString = `${basePath}?`;
   queryArray = updateQuery("page_size", queryArray, page_size?.toString());
   queryArray = updateQuery("theme_id", queryArray, theme_id);
