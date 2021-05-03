@@ -1,12 +1,17 @@
 import React from "react";
 import { useRouter } from "next/router";
+import prepareQueryString from "../middleware/query";
 
 const ItemsOnPage = () => {
   const router = useRouter();
   const path = router.asPath.split("?")[0];
 
   const handleItemCountChange = (e: any) => {
-    router.push(`${path}?page_size=${e.target.value}`);
+    const queryString = prepareQueryString({
+      path: router.asPath,
+      page_size: e.target.value,
+    });
+    router.push(queryString);
   };
 
   return (

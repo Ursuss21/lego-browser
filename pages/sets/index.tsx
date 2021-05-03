@@ -89,17 +89,22 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const pgSize = context.query.page_size as string;
   const pageSize = parseInt(pgSize, 10) || 20;
 
+  const thmID = context.query.theme_id as string;
+  const themeID = parseInt(thmID, 10) || 0;
+
   console.log(context.query);
   const setsData = await getDataFromAPI({
     folder: "sets",
     page: currentPage,
     page_size: pageSize,
+    theme_id: themeID,
   });
 
   const themesData = await getDataFromAPI({
     folder: "themes",
     page_size: 1000,
   });
+
   return {
     props: {
       sets: setsData.results,

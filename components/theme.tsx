@@ -1,4 +1,6 @@
+import { useRouter } from "next/router";
 import React, { FunctionComponent } from "react";
+import prepareQueryString from "../middleware/query";
 
 interface IProps {
   themes: [
@@ -86,9 +88,24 @@ const prepareThemesArray = (
 
 const Theme: FunctionComponent<IProps> = ({ themes, themesCount }) => {
   const preparedThemes = prepareThemesArray(themes);
+
+  const router = useRouter();
+  const path = router.asPath.split("?")[0];
+
+  const handleThemeChange = (e: any) => {
+    const queryString = prepareQueryString({
+      path: router.asPath,
+      theme_id: e.target.value,
+    });
+    router.push(queryString);
+  };
+
   return (
     <div className="theme-dropdown">
-      <select>
+      <select onChange={handleThemeChange}>
+        <option key={0} value={0}>
+          All
+        </option>
         {preparedThemes.map((theme) => {
           return (
             <option key={theme.id} value={theme.id}>
