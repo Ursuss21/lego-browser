@@ -10,15 +10,25 @@ interface IProps {
 }
 
 const adjustPaginationSize = (currentPage: number, numberOfPages: number) => {
+  if (numberOfPages === 0) {
+    return -5;
+  }
   if (numberOfPages === 1) {
     return -4;
   }
   if (numberOfPages === 2) {
     return -3;
   }
-  if (currentPage === 1 || currentPage === numberOfPages) {
+  if (
+    currentPage === 1 ||
+    currentPage === numberOfPages ||
+    (currentPage === numberOfPages - 1 && numberOfPages <= 3)
+  ) {
     return -2;
-  } else if (currentPage === 2 || currentPage === numberOfPages - 1) {
+  } else if (
+    currentPage === 2 ||
+    (currentPage === numberOfPages - 1 && numberOfPages > 3)
+  ) {
     return -1;
   }
   return 0;
