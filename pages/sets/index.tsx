@@ -5,12 +5,10 @@ import Pagination from "../../components/pagination";
 import Header from "../../components/header";
 import Footer from "../../components/footer";
 import Card from "../../components/card";
-import Dropdown from "../../components/dropdown";
+import ItemsOnPage from "../../components/itemsOnPage";
+import Theme from "../../components/theme";
 
 interface IProps {
-  count: number;
-  currentPage: number;
-  pageSize: number;
   sets: [
     {
       set_num: string;
@@ -22,25 +20,41 @@ interface IProps {
       set_url: string;
     }
   ];
+  setsCount: number;
+  themes: [
+    {
+      id: number;
+      parent_id: number;
+      name: string;
+    }
+  ];
+  themesCount: number;
+  currentPage: number;
+  pageSize: number;
 }
 
 const SetsMainPage: FunctionComponent<IProps> = ({
-  count,
+  sets,
+  setsCount,
+  themes,
+  themesCount,
   currentPage,
   pageSize,
-  sets,
 }) => {
   return (
     <div>
       <Header />
       <main>
+        <div className="filter-options">
+          <ItemsOnPage />
+          <Theme themes={themes} themesCount={themesCount} />
+        </div>
         <Pagination
           category="sets"
           currentPage={currentPage}
-          count={count}
+          setsCount={setsCount}
           pageSize={pageSize}
         />
-        <Dropdown />
         <div className="card-container">
           {sets.map((set) => {
             return (
@@ -57,7 +71,7 @@ const SetsMainPage: FunctionComponent<IProps> = ({
         <Pagination
           category="sets"
           currentPage={currentPage}
-          count={count}
+          setsCount={setsCount}
           pageSize={pageSize}
         />
       </main>
@@ -76,15 +90,22 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const pageSize = parseInt(pgSize, 10) || 20;
 
   console.log(context.query);
-  const data = await getDataFromAPI({
+  const setsData = await getDataFromAPI({
     folder: "sets",
     page: currentPage,
     page_size: pageSize,
   });
+
+  const themesData = await getDataFromAPI({
+    folder: "themes",
+    page_size: 1000,
+  });
   return {
     props: {
-      sets: data.results,
-      count: data.count,
+      sets: setsData.results,
+      setsCount: setsData.count,
+      themes: themesData.results,
+      themesCount: themesData.count,
       currentPage,
       pageSize,
     },

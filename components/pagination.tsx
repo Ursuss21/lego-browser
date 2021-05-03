@@ -5,7 +5,7 @@ interface IProps {
   category: string;
   currentPage: number;
   pageSize: number;
-  count: number;
+  setsCount: number;
 }
 
 const adjustPaginationSize = (currentPage: number, numberOfPages: number) => {
@@ -30,9 +30,9 @@ const Pagination: FunctionComponent<IProps> = ({
   category,
   currentPage,
   pageSize,
-  count,
+  setsCount,
 }) => {
-  const numberOfPages = Math.ceil(count / pageSize);
+  const numberOfPages = Math.ceil(setsCount / pageSize);
   const paginationSize = 5;
 
   const pagination = Array(

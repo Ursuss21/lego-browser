@@ -1,7 +1,7 @@
 import React from "react";
-import { Router, useRouter } from "next/router";
+import { useRouter } from "next/router";
 
-const Dropdown = () => {
+const ItemsOnPage = () => {
   const router = useRouter();
   const path = router.asPath.split("?")[0];
 
@@ -16,8 +16,9 @@ const Dropdown = () => {
         <option value="50">50</option>
         <option value="100">100</option>
       </select>
+      <div className="dropdown-description">elements on page</div>
     </div>
   );
 };
 
-export default Dropdown;
+export default ItemsOnPage;
