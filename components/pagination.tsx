@@ -9,40 +9,6 @@ interface IProps {
   setsCount: number;
 }
 
-const adjustPaginationSize = (currentPage: number, numberOfPages: number) => {
-  if (numberOfPages === 0) {
-    return -5;
-  }
-  if (numberOfPages === 1) {
-    return -4;
-  }
-  if (numberOfPages === 2) {
-    return -3;
-  }
-  if (
-    currentPage === 1 ||
-    currentPage === numberOfPages ||
-    (currentPage === numberOfPages - 1 && numberOfPages <= 3)
-  ) {
-    return -2;
-  } else if (
-    currentPage === 2 ||
-    (currentPage === numberOfPages - 1 && numberOfPages > 3)
-  ) {
-    return -1;
-  }
-  return 0;
-};
-
-const adjustPaginationOffset = (currentPage: number) => {
-  if (currentPage === 1) {
-    return 0;
-  } else if (currentPage === 2) {
-    return -1;
-  }
-  return -2;
-};
-
 const Pagination: FunctionComponent<IProps> = ({
   category,
   currentPage,
@@ -53,105 +19,93 @@ const Pagination: FunctionComponent<IProps> = ({
   const numberOfPages = Math.ceil(setsCount / pageSize);
   const paginationSize = 5;
 
-  const pagination = Array(
-    paginationSize + adjustPaginationSize(currentPage, numberOfPages)
-  )
+  const adjustPaginationSize = () => {
+    if (numberOfPages === 0) {
+      return -5;
+    }
+    if (numberOfPages === 1) {
+      return -4;
+    }
+    if (numberOfPages === 2) {
+      return -3;
+    }
+    if (
+      currentPage === 1 ||
+      currentPage === numberOfPages ||
+      (currentPage === numberOfPages - 1 && numberOfPages <= 3)
+    ) {
+      return -2;
+    } else if (
+      currentPage === 2 ||
+      (currentPage === numberOfPages - 1 && numberOfPages > 3)
+    ) {
+      return -1;
+    }
+    return 0;
+  };
+
+  const adjustPaginationOffset = () => {
+    if (currentPage === 1) {
+      return 0;
+    } else if (currentPage === 2) {
+      return -1;
+    }
+    return -2;
+  };
+
+  const setLinkClass = (active: boolean, disabled: boolean, text: string) => {
+    if (active) {
+      return <a className="active">{text}</a>;
+    }
+    if (disabled) {
+      return <a className="disabled">{text}</a>;
+    }
+    return <a>{text}</a>;
+  };
+
+  const createPaginationLink = (
+    targetPage: number,
+    active: boolean,
+    disabled: boolean,
+    text: string
+  ) => {
+    return (
+      <Link
+        href={`/${category}/${targetPage}?page_size=${pageSize}&theme_id=${themeID}`}
+        key={0}
+      >
+        {setLinkClass(active, disabled, text)}
+      </Link>
+    );
+  };
+
+  const pagination = Array(paginationSize + adjustPaginationSize())
     .fill("")
     .map((_, index) => {
-      const idx = currentPage + index + adjustPaginationOffset(currentPage);
+      const idx = currentPage + index + adjustPaginationOffset();
       return idx;
     });
   return (
     <div className="pagination">
-      {currentPage === 1 ? (
-        <Link
-          href={`/${category}/1?page_size=${pageSize}&theme_id=${themeID}`}
-          key={0}
-        >
-          <a className="disabled">&lt;&lt;</a>
-        </Link>
-      ) : (
-        <Link
-          href={`/${category}/1?page_size=${pageSize}&theme_id=${themeID}`}
-          key={0}
-        >
-          <a>&lt;&lt;</a>
-        </Link>
-      )}
-      {currentPage === 1 ? (
-        <Link
-          href={`/${category}/${
-            currentPage - 1
-          }?page_size=${pageSize}&theme_id=${themeID}`}
-          key={0}
-        >
-          <a className="disabled">&lt;</a>
-        </Link>
-      ) : (
-        <Link
-          href={`/${category}/${
-            currentPage - 1
-          }?page_size=${pageSize}&theme_id=${themeID}`}
-          key={0}
-        >
-          <a>&lt;</a>
-        </Link>
-      )}
+      {currentPage === 1
+        ? createPaginationLink(1, false, true, "<<")
+        : createPaginationLink(1, false, false, "<<")}
+      {currentPage === 1
+        ? createPaginationLink(currentPage - 1, false, true, "<")
+        : createPaginationLink(currentPage - 1, false, false, "<")}
       {pagination.map((page) => {
         if (currentPage === page) {
-          return (
-            <Link
-              href={`/${category}/${page}?page_size=${pageSize}&theme_id=${themeID}`}
-              key={page}
-            >
-              <a className="active">{page}</a>
-            </Link>
-          );
+          return createPaginationLink(page, true, false, page.toString());
         } else {
-          return (
-            <Link
-              href={`/${category}/${page}?page_size=${pageSize}&theme_id=${themeID}`}
-              key={page}
-            >
-              <a>{page}</a>
-            </Link>
-          );
+          return createPaginationLink(page, false, false, page.toString());
         }
       })}
-      {currentPage === numberOfPages ? (
-        <Link
-          href={`/${category}/${
-            currentPage + 1
-          }?page_size=${pageSize}&theme_id=${themeID}`}
-          key={0}
-        >
-          <a className="disabled">&gt;</a>
-        </Link>
-      ) : (
-        <Link
-          href={`/${category}/${
-            currentPage + 1
-          }?page_size=${pageSize}&theme_id=${themeID}`}
-          key={0}
-        >
-          <a>&gt;</a>
-        </Link>
-      )}
-      {currentPage === numberOfPages ? (
-        <Link
-          href={`/${category}/${numberOfPages}?page_size=${pageSize}&theme_id=${themeID}`}
-          key={0}
-        >
-          <a className="disabled">&gt;&gt;</a>
-        </Link>
-      ) : (
-        <Link
-          href={`/${category}/${numberOfPages}?page_size=${pageSize}&theme_id=${themeID}`}
-          key={0}
-        >
-          <a>&gt;&gt;</a>
-        </Link>
-      )}
+      {currentPage === numberOfPages
+        ? createPaginationLink(currentPage + 1, false, true, ">")
+        : createPaginationLink(currentPage + 1, false, false, ">")}
+      {currentPage === numberOfPages
+        ? createPaginationLink(numberOfPages, false, true, ">>")
+        : createPaginationLink(numberOfPages, false, false, ">>")}
     </div>
   );
 };
