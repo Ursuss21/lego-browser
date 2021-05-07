@@ -5,8 +5,8 @@ interface IProps {
   category: string;
   currentPage: number;
   pageSize: number;
-  themeID: number;
-  setsCount: number;
+  themeID?: number | undefined;
+  itemsCount: number;
 }
 
 const Pagination: FunctionComponent<IProps> = ({
@@ -14,9 +14,9 @@ const Pagination: FunctionComponent<IProps> = ({
   currentPage,
   pageSize,
   themeID,
-  setsCount,
+  itemsCount,
 }) => {
-  const numberOfPages = Math.ceil(setsCount / pageSize);
+  const numberOfPages = Math.ceil(itemsCount / pageSize);
   const paginationSize = 5;
 
   const adjustPaginationSize = () => {
@@ -69,11 +69,14 @@ const Pagination: FunctionComponent<IProps> = ({
     disabled: boolean,
     text: string
   ) => {
+    let targetString;
+    if (themeID !== undefined) {
+      targetString = `/${category}/${targetPage}?page_size=${pageSize}&theme_id=${themeID}`;
+    } else {
+      targetString = `/${category}/${targetPage}?page_size=${pageSize}`;
+    }
     return (
-      <Link
-        href={`/${category}/${targetPage}?page_size=${pageSize}&theme_id=${themeID}`}
-        key={0}
-      >
+      <Link href={targetString} key={targetPage}>
         {setLinkClass(active, disabled, text)}
       </Link>
     );

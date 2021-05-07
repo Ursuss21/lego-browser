@@ -1,12 +1,13 @@
 import React, { FunctionComponent } from "react";
-import Link from "next/link";
-import { GetStaticProps } from "next";
+import { GetServerSideProps } from "next";
 import getDataFromAPI from "../../middleware/fetch";
+import Header from "../../components/header";
+import ItemsOnPage from "../../components/itemsOnPage";
+import Pagination from "../../components/pagination";
+import Card from "../../components/card";
+import Footer from "../../components/footer";
 
 interface IProps {
-  count: number;
-  next: string;
-  previous: string;
   parts: [
     {
       part_num: string;
@@ -16,36 +17,77 @@ interface IProps {
       part_img_url: string;
     }
   ];
+  partsCount: number;
+  currentPage: number;
+  pageSize: number;
 }
 
-const PartsMainPage: FunctionComponent<IProps> = ({ count, parts }) => {
+const PartsMainPage: FunctionComponent<IProps> = ({
+  parts,
+  partsCount,
+  currentPage,
+  pageSize,
+}) => {
   return (
     <div>
-      <h1>Parts Page</h1>
-      <div>
-        {parts.map((part) => {
-          return (
-            <Link href={`/parts/part/${part.part_num}`} key={part.part_num}>
-              <a>{part.part_num}</a>
-            </Link>
-          );
-        })}
-      </div>
-      <Link href="/">
-        <a>Main Page</a>
-      </Link>
+      <Header />
+      <main>
+        <div className="filter-options">
+          <ItemsOnPage />
+        </div>
+        <Pagination
+          category="parts"
+          currentPage={currentPage}
+          itemsCount={partsCount}
+          pageSize={pageSize}
+        />
+        <div className="card-container">
+          {parts.map((part) => {
+            return (
+              <Card
+                path="/sets/set/"
+                num={part.part_num}
+                img_url={part.part_img_url}
+                name={part.name}
+                key={part.part_num}
+              />
+            );
+          })}
+        </div>
+        <Pagination
+          category="parts"
+          currentPage={currentPage}
+          itemsCount={partsCount}
+          pageSize={pageSize}
+        />
+      </main>
+      <Footer />
     </div>
   );
 };
 
 export default PartsMainPage;
 
-export const getStaticProps: GetStaticProps = async (context) => {
-  const data = await getDataFromAPI({ folder: "parts", page: 1 });
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const curPage = context.params?.currentPage as string;
+  const currentPage = parseInt(curPage, 10) || 1;
+
+  const pgSize = context.query.page_size as string;
+  const pageSize = parseInt(pgSize, 10) || 20;
+
+  console.log(context.query);
+  const partsData = await getDataFromAPI({
+    folder: "parts",
+    page: currentPage,
+    page_size: pageSize,
+  });
+
   return {
     props: {
-      parts: data.results,
-      count: data.count,
+      parts: partsData.results,
+      partsCount: partsData.count,
+      currentPage,
+      pageSize,
     },
   };
 };

@@ -54,7 +54,7 @@ const SetsMainPage: FunctionComponent<IProps> = ({
         <Pagination
           category="sets"
           currentPage={currentPage}
-          setsCount={setsCount}
+          itemsCount={setsCount}
           pageSize={pageSize}
           themeID={themeID}
         />
@@ -74,7 +74,7 @@ const SetsMainPage: FunctionComponent<IProps> = ({
         <Pagination
           category="sets"
           currentPage={currentPage}
-          setsCount={setsCount}
+          itemsCount={setsCount}
           pageSize={pageSize}
           themeID={themeID}
         />

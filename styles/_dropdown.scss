@@ -37,3 +37,31 @@
     }
   }
 }
+
+.theme-dropdown {
+  width: 200px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  font-size: $font-medium;
+
+  select {
+    width: 200px;
+    background-color: $black;
+    color: $text-white;
+    border: none;
+    box-shadow: 0 0 2px $text-white;
+    transition: 0.5s;
+    font-size: $font-medium;
+
+    &:hover {
+      box-shadow: 0 0 10px $text-white;
+    }
+  }
+
+  .dropdown-description {
+    width: 150px;
+    text-align: center;
+  }
+}
