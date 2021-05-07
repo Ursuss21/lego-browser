@@ -63,6 +63,40 @@ const Pagination: FunctionComponent<IProps> = ({
     });
   return (
     <div className="pagination">
+      {currentPage === 1 ? (
+        <Link
+          href={`/${category}/1?page_size=${pageSize}&theme_id=${themeID}`}
+          key={0}
+        >
+          <a className="disabled">&lt;&lt;</a>
+        </Link>
+      ) : (
+        <Link
+          href={`/${category}/1?page_size=${pageSize}&theme_id=${themeID}`}
+          key={0}
+        >
+          <a>&lt;&lt;</a>
+        </Link>
+      )}
+      {currentPage === 1 ? (
+        <Link
+          href={`/${category}/${
+            currentPage - 1
+          }?page_size=${pageSize}&theme_id=${themeID}`}
+          key={0}
+        >
+          <a className="disabled">&lt;</a>
+        </Link>
+      ) : (
+        <Link
+          href={`/${category}/${
+            currentPage - 1
+          }?page_size=${pageSize}&theme_id=${themeID}`}
+          key={0}
+        >
+          <a>&lt;</a>
+        </Link>
+      )}
       {pagination.map((page) => {
         if (currentPage === page) {
           return (
@@ -84,6 +118,40 @@ const Pagination: FunctionComponent<IProps> = ({
           );
         }
       })}
+      {currentPage === numberOfPages ? (
+        <Link
+          href={`/${category}/${
+            currentPage + 1
+          }?page_size=${pageSize}&theme_id=${themeID}`}
+          key={0}
+        >
+          <a className="disabled">&gt;</a>
+        </Link>
+      ) : (
+        <Link
+          href={`/${category}/${
+            currentPage + 1
+          }?page_size=${pageSize}&theme_id=${themeID}`}
+          key={0}
+        >
+          <a>&gt;</a>
+        </Link>
+      )}
+      {currentPage === numberOfPages ? (
+        <Link
+          href={`/${category}/${numberOfPages}?page_size=${pageSize}&theme_id=${themeID}`}
+          key={0}
+        >
+          <a className="disabled">&gt;&gt;</a>
+        </Link>
+      ) : (
+        <Link
+          href={`/${category}/${numberOfPages}?page_size=${pageSize}&theme_id=${themeID}`}
+          key={0}
+        >
+          <a>&gt;&gt;</a>
+        </Link>
+      )}
     </div>
   );
 };
