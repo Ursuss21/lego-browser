@@ -76,6 +76,7 @@ const PartsMainPage: FunctionComponent<IProps> = ({
           currentPage={currentPage}
           itemsCount={partsCount}
           pageSize={pageSize}
+          partCategoryID={partCategoryID}
         />
       </main>
       <Footer />
@@ -95,7 +96,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const prtCatID = context.query.part_cat_id as string;
   const partCategoryID = parseInt(prtCatID, 10) || 0;
 
-  console.log(context.query);
   const partsData = await getDataFromAPI({
     folder: "parts",
     page: currentPage,

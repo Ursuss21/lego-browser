@@ -96,7 +96,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const thmID = context.query.theme_id as string;
   const themeID = parseInt(thmID, 10) || 0;
 
-  console.log(context.query);
   const setsData = await getDataFromAPI({
     folder: "sets",
     page: currentPage,

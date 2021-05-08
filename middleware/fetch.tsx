@@ -45,7 +45,7 @@ const getDataFromAPI = async ({
       urlString += `&part_cat_id=${part_cat_id}`;
     }
   }
-  console.log(urlString);
+
   const res = await fetch(urlString);
   const data = await res.json();
 

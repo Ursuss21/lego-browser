@@ -31,7 +31,7 @@ const Page: FunctionComponent<IProps> = ({ part }) => {
               <img src={part.part_img_url} alt={part.name} />
             </div>
             <div className="item-description">
-              <span>Set number: {part.part_num}</span>
+              <span>Part number: {part.part_num}</span>
               <span>Name: {part.name}</span>
               <span>
                 <Link href={part.part_url}>Rebrickable link</Link>
