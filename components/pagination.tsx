@@ -76,7 +76,7 @@ const Pagination: FunctionComponent<IProps> = ({
       targetString = `/${category}/${targetPage}?page_size=${pageSize}`;
     }
     return (
-      <Link href={targetString} key={targetPage}>
+      <Link href={targetString} key={text}>
         {setLinkClass(active, disabled, text)}
       </Link>
     );
