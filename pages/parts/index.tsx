@@ -62,7 +62,7 @@ const PartsMainPage: FunctionComponent<IProps> = ({
           {parts.map((part) => {
             return (
               <Card
-                path="/sets/set/"
+                path="/parts/part/"
                 num={part.part_num}
                 img_url={part.part_img_url}
                 name={part.name}
