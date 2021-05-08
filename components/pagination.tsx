@@ -5,16 +5,18 @@ interface IProps {
   category: string;
   currentPage: number;
   pageSize: number;
-  themeID?: number | undefined;
   itemsCount: number;
+  themeID?: number | undefined;
+  partCategoryID?: number | undefined;
 }
 
 const Pagination: FunctionComponent<IProps> = ({
   category,
   currentPage,
   pageSize,
-  themeID,
   itemsCount,
+  themeID,
+  partCategoryID,
 }) => {
   const numberOfPages = Math.ceil(itemsCount / pageSize);
   const paginationSize = 5;
@@ -72,6 +74,8 @@ const Pagination: FunctionComponent<IProps> = ({
     let targetString;
     if (themeID !== undefined) {
       targetString = `/${category}/${targetPage}?page_size=${pageSize}&theme_id=${themeID}`;
+    } else if (partCategoryID !== undefined) {
+      targetString = `/${category}/${targetPage}?page_size=${pageSize}&part_cat_id=${partCategoryID}`;
     } else {
       targetString = `/${category}/${targetPage}?page_size=${pageSize}`;
     }

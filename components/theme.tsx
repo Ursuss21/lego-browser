@@ -90,7 +90,6 @@ const Theme: FunctionComponent<IProps> = ({ themes, themesCount }) => {
   const preparedThemes = prepareThemesArray(themes);
 
   const router = useRouter();
-  const path = router.asPath.split("?")[0];
 
   const handleThemeChange = (e: any) => {
     const queryString = prepareQueryString({

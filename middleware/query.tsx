@@ -2,6 +2,7 @@ interface IGetDataParameters {
   path: string | undefined;
   page_size?: number | undefined;
   theme_id?: string | undefined;
+  part_cat_id?: number | undefined;
 }
 
 const updateQuery = (
@@ -35,6 +36,7 @@ const prepareQueryString = ({
   path,
   page_size,
   theme_id,
+  part_cat_id,
 }: IGetDataParameters) => {
   let basePath;
   let queryString;
@@ -55,6 +57,7 @@ const prepareQueryString = ({
   resultString = `${basePath}?`;
   queryArray = updateQuery("page_size", queryArray, page_size?.toString());
   queryArray = updateQuery("theme_id", queryArray, theme_id);
+  queryArray = updateQuery("part_cat_id", queryArray, part_cat_id?.toString());
   queryString = queryArray?.join("&");
   resultString = `${resultString}${queryString}`;
   return resultString;

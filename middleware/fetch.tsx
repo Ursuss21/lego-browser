@@ -3,6 +3,7 @@ interface IGetDataParameters {
   page?: number | undefined;
   page_size?: number | undefined;
   theme_id?: number | undefined;
+  part_cat_id?: number | undefined;
   id?: string | undefined;
 }
 
@@ -11,6 +12,7 @@ const getDataFromAPI = async ({
   page,
   page_size,
   theme_id,
+  part_cat_id,
   id,
 }: IGetDataParameters) => {
   const url = process.env.REBRICKABLE_URL;
@@ -35,6 +37,12 @@ const getDataFromAPI = async ({
   if (typeof theme_id !== "undefined") {
     if (theme_id !== 0) {
       urlString += `&theme_id=${theme_id}`;
+    }
+  }
+
+  if (typeof part_cat_id !== "undefined") {
+    if (part_cat_id !== 0) {
+      urlString += `&part_cat_id=${part_cat_id}`;
     }
   }
   console.log(urlString);

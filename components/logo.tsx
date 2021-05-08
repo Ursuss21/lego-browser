@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react";
+import React from "react";
 
 const Logo = () => {
   return <img src="/src/logo.png" alt="Logo" className="logo" />;

@@ -13,7 +13,11 @@ const Card: FunctionComponent<IProps> = ({ path, num, img_url, name }) => {
     <Link href={`${path}${num}`} key={num}>
       <div className="card">
         <div className="card-miniature">
-          <img src={img_url} alt={name} />
+          {img_url !== null ? (
+            <img src={img_url} alt={name} />
+          ) : (
+            <img src="/src/noimage.png" alt={name} />
+          )}
         </div>
         <div className="card-text">
           <p>
