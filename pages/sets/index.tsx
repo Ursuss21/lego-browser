@@ -6,7 +6,8 @@ import Header from "../../components/header";
 import Footer from "../../components/footer";
 import Card from "../../components/card";
 import ItemsOnPage from "../../components/itemsOnPage";
-import Theme from "../../components/theme";
+import Dropdown from "../../components/dropdown";
+import prepareNames from "../../middleware/utils";
 
 interface IProps {
   sets: [
@@ -28,7 +29,6 @@ interface IProps {
       name: string;
     }
   ];
-  themesCount: number;
   currentPage: number;
   pageSize: number;
   themeID: number;
@@ -38,18 +38,18 @@ const SetsMainPage: FunctionComponent<IProps> = ({
   sets,
   setsCount,
   themes,
-  themesCount,
   currentPage,
   pageSize,
   themeID,
 }) => {
+  const resultThemes = prepareNames(themes);
   return (
     <div>
       <Header />
       <main>
         <div className="filter-options">
           <ItemsOnPage />
-          <Theme themes={themes} themesCount={themesCount} />
+          <Dropdown items={resultThemes} queryTarget="theme_id" />
         </div>
         <Pagination
           category="sets"
@@ -113,7 +113,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       sets: setsData.results,
       setsCount: setsData.count,
       themes: themesData.results,
-      themesCount: themesData.count,
       currentPage,
       pageSize,
       themeID,

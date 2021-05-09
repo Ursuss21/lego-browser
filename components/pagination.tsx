@@ -8,6 +8,7 @@ interface IProps {
   itemsCount: number;
   themeID?: number | undefined;
   partCategoryID?: number | undefined;
+  colorID?: number | undefined;
 }
 
 const Pagination: FunctionComponent<IProps> = ({
@@ -17,6 +18,7 @@ const Pagination: FunctionComponent<IProps> = ({
   itemsCount,
   themeID,
   partCategoryID,
+  colorID,
 }) => {
   const numberOfPages = Math.ceil(itemsCount / pageSize);
   const paginationSize = 5;
@@ -74,8 +76,12 @@ const Pagination: FunctionComponent<IProps> = ({
     let targetString;
     if (themeID !== undefined) {
       targetString = `/${category}/${targetPage}?page_size=${pageSize}&theme_id=${themeID}`;
+    } else if (partCategoryID !== undefined && colorID !== undefined) {
+      targetString = `/${category}/${targetPage}?page_size=${pageSize}&part_cat_id=${partCategoryID}&color_id=${colorID}`;
     } else if (partCategoryID !== undefined) {
       targetString = `/${category}/${targetPage}?page_size=${pageSize}&part_cat_id=${partCategoryID}`;
+    } else if (colorID !== undefined) {
+      targetString = `/${category}/${targetPage}?page_size=${pageSize}&color_id=${colorID}`;
     } else {
       targetString = `/${category}/${targetPage}?page_size=${pageSize}`;
     }

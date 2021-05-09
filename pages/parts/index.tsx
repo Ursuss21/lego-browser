@@ -6,7 +6,7 @@ import ItemsOnPage from "../../components/itemsOnPage";
 import Pagination from "../../components/pagination";
 import Card from "../../components/card";
 import Footer from "../../components/footer";
-import PartCategory from "../../components/partCategory";
+import Dropdown from "../../components/dropdown";
 
 interface IProps {
   parts: [
@@ -25,20 +25,29 @@ interface IProps {
       name: string;
     }
   ];
-  partCategoriesCount: number;
+  colors: [
+    {
+      id: number;
+      name: string;
+      rgb: string;
+      is_trans: boolean;
+    }
+  ];
   currentPage: number;
   pageSize: number;
   partCategoryID: number;
+  colorID: number;
 }
 
 const PartsMainPage: FunctionComponent<IProps> = ({
   parts,
   partsCount,
   partCategories,
-  partCategoriesCount,
+  colors,
   currentPage,
   pageSize,
   partCategoryID,
+  colorID,
 }) => {
   return (
     <div>
@@ -46,10 +55,8 @@ const PartsMainPage: FunctionComponent<IProps> = ({
       <main>
         <div className="filter-options">
           <ItemsOnPage />
-          <PartCategory
-            partCategories={partCategories}
-            partCategoriesCount={partCategoriesCount}
-          />
+          <Dropdown items={partCategories} queryTarget="part_cat_id" />
+          <Dropdown items={colors} queryTarget="color_id" />
         </div>
         <Pagination
           category="parts"
@@ -57,6 +64,7 @@ const PartsMainPage: FunctionComponent<IProps> = ({
           itemsCount={partsCount}
           pageSize={pageSize}
           partCategoryID={partCategoryID}
+          colorID={colorID}
         />
         <div className="card-container">
           {parts.map((part) => {
@@ -77,6 +85,7 @@ const PartsMainPage: FunctionComponent<IProps> = ({
           itemsCount={partsCount}
           pageSize={pageSize}
           partCategoryID={partCategoryID}
+          colorID={colorID}
         />
       </main>
       <Footer />
@@ -96,15 +105,24 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const prtCatID = context.query.part_cat_id as string;
   const partCategoryID = parseInt(prtCatID, 10) || 0;
 
+  const clrID = context.query.color_id as string;
+  const colorID = parseInt(clrID, 10) || 0;
+
   const partsData = await getDataFromAPI({
     folder: "parts",
     page: currentPage,
     page_size: pageSize,
     part_cat_id: partCategoryID,
+    color_id: colorID,
   });
 
   const partCategoriesData = await getDataFromAPI({
     folder: "part_categories",
+    page_size: 1000,
+  });
+
+  const colorsData = await getDataFromAPI({
+    folder: "colors",
     page_size: 1000,
   });
 
@@ -113,10 +131,11 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       parts: partsData.results,
       partsCount: partsData.count,
       partCategories: partCategoriesData.results,
-      partCategoriesCount: partCategoriesData.count,
+      colors: colorsData.results,
       currentPage,
       pageSize,
       partCategoryID,
+      colorID,
     },
   };
 };
