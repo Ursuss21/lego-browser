@@ -1,9 +1,8 @@
 interface IGetDataParameters {
   path: string | undefined;
   page_size?: number | undefined;
-  theme_id?: string | undefined;
-  color_id?: number | undefined;
-  part_cat_id?: number | undefined;
+  value?: number | undefined;
+  target?: string | undefined;
 }
 
 const updateQuery = (
@@ -36,9 +35,8 @@ const updateQuery = (
 const prepareQueryString = ({
   path,
   page_size,
-  theme_id,
-  color_id,
-  part_cat_id,
+  value,
+  target,
 }: IGetDataParameters) => {
   let basePath;
   let queryString;
@@ -58,9 +56,19 @@ const prepareQueryString = ({
   }
   resultString = `${basePath}?`;
   queryArray = updateQuery("page_size", queryArray, page_size?.toString());
-  queryArray = updateQuery("theme_id", queryArray, theme_id);
-  queryArray = updateQuery("part_cat_id", queryArray, part_cat_id?.toString());
-  queryArray = updateQuery("color_id", queryArray, color_id?.toString());
+  if (value !== undefined && target !== undefined) {
+    switch (target) {
+      case "theme_id":
+        queryArray = updateQuery("theme_id", queryArray, value.toString());
+        break;
+      case "part_cat_id":
+        queryArray = updateQuery("part_cat_id", queryArray, value.toString());
+        break;
+      case "color_id":
+        queryArray = updateQuery("color_id", queryArray, value.toString());
+        break;
+    }
+  }
   queryString = queryArray?.join("&");
   resultString = `${resultString}${queryString}`;
   return resultString;

@@ -33,31 +33,11 @@ const Dropdown: FunctionComponent<IProps> = ({ items, queryTarget }) => {
 
   const router = useRouter();
   const handleChange = (e: any) => {
-    let queryString;
-    switch (queryTarget) {
-      case "part_cat_id":
-        queryString = prepareQueryString({
-          path: router.asPath,
-          part_cat_id: e.target.value,
-        });
-        break;
-      case "theme_id":
-        queryString = prepareQueryString({
-          path: router.asPath,
-          theme_id: e.target.value,
-        });
-        break;
-      case "color_id":
-        queryString = prepareQueryString({
-          path: router.asPath,
-          color_id: e.target.value,
-        });
-        break;
-      default:
-        queryString = prepareQueryString({
-          path: router.asPath,
-        });
-    }
+    const queryString = prepareQueryString({
+      path: router.asPath,
+      target: queryTarget,
+      value: e.target.value,
+    });
     router.push(queryString);
   };
 

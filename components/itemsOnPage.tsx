@@ -4,7 +4,6 @@ import prepareQueryString from "../middleware/query";
 
 const ItemsOnPage = () => {
   const router = useRouter();
-  const path = router.asPath.split("?")[0];
 
   const handleItemCountChange = (e: any) => {
     const queryString = prepareQueryString({
