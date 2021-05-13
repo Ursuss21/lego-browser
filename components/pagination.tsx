@@ -73,17 +73,15 @@ const Pagination: FunctionComponent<IProps> = ({
     disabled: boolean,
     text: string
   ) => {
-    let targetString;
+    let targetString = `/${category}/${targetPage}?page_size=${pageSize}`;
     if (themeID !== undefined) {
-      targetString = `/${category}/${targetPage}?page_size=${pageSize}&theme_id=${themeID}`;
+      targetString += `&theme_id=${themeID}`;
     } else if (partCategoryID !== undefined && colorID !== undefined) {
-      targetString = `/${category}/${targetPage}?page_size=${pageSize}&part_cat_id=${partCategoryID}&color_id=${colorID}`;
+      targetString += `&part_cat_id=${partCategoryID}&color_id=${colorID}`;
     } else if (partCategoryID !== undefined) {
-      targetString = `/${category}/${targetPage}?page_size=${pageSize}&part_cat_id=${partCategoryID}`;
+      targetString += `&part_cat_id=${partCategoryID}`;
     } else if (colorID !== undefined) {
-      targetString = `/${category}/${targetPage}?page_size=${pageSize}&color_id=${colorID}`;
-    } else {
-      targetString = `/${category}/${targetPage}?page_size=${pageSize}`;
+      targetString += `&color_id=${colorID}`;
     }
     return (
       <Link href={targetString} key={text}>

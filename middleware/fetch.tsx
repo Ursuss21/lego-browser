@@ -22,33 +22,33 @@ const getDataFromAPI = async ({
 
   let urlString = `${url}${folder}`;
 
-  if (typeof id !== "undefined") {
+  if (id !== undefined) {
     urlString += `/${id}`;
   }
 
   urlString += `/?key=${key}`;
 
-  if (typeof page !== "undefined") {
+  if (page !== undefined) {
     urlString += `&page=${page}`;
   }
 
-  if (typeof page_size !== "undefined") {
+  if (page_size !== undefined) {
     urlString += `&page_size=${page_size}`;
   }
 
-  if (typeof theme_id !== "undefined") {
+  if (theme_id !== undefined) {
     if (theme_id !== 0) {
       urlString += `&theme_id=${theme_id}`;
     }
   }
 
-  if (typeof part_cat_id !== "undefined") {
+  if (part_cat_id !== undefined) {
     if (part_cat_id !== 0) {
       urlString += `&part_cat_id=${part_cat_id}`;
     }
   }
 
-  if (typeof color_id !== "undefined") {
+  if (color_id !== undefined) {
     if (color_id !== 0) {
       urlString += `&color_id=${color_id}`;
     }

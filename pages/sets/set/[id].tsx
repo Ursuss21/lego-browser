@@ -62,7 +62,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  if (typeof params !== "undefined") {
+  if (params !== undefined) {
     const data = await getDataFromAPI({
       folder: "sets",
       id: params.id?.toString(),

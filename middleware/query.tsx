@@ -1,10 +1,3 @@
-interface IGetDataParameters {
-  path: string | undefined;
-  page_size?: number | undefined;
-  value?: number | undefined;
-  target?: string | undefined;
-}
-
 const updateQuery = (
   argument: string,
   queryArray: string[] | undefined,
@@ -31,6 +24,13 @@ const updateQuery = (
   }
   return queryArray;
 };
+
+interface IGetDataParameters {
+  path: string | undefined;
+  page_size?: number | undefined;
+  value?: number | undefined;
+  target?: string | undefined;
+}
 
 const prepareQueryString = ({
   path,
